@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# displays Holberton School 10 times.
+
+C=0
+while [[ $C -lt 100 ]]
+do
+    ((C++))
+    if [ $((C%15)) = 0 ]
+    then
+        echo "FizzBuzz"
+    elif [ $((C%3)) = 0 ]
+    then
+        echo "Fizz"
+    elif [ $((C%5)) = 0 ]
+    then
+        echo "Buzz"
+    else
+        echo "$C"
+    fi
+done

@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# displays numbers from 1 to 20.
+
+C=0
+while [ $C -lt 20 ]
+do
+    ((C++))
+    case $C in
+
+    4)
+	    echo "$C"
+	    echo "bad luck from China"
+	    ;;
+	
+	9)
+	    echo "$C"
+	    echo "bad luck from Japan"
+	    ;;
+	
+	17)
+	    echo "$C"
+	    echo "bad luck from Italy"
+	    ;;
+
+	*)
+	    echo "$C"
+	    ;;
+    esac
+done
