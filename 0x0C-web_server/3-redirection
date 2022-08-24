@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Scripts that configures a redirect for nginx
+# Scripts redirect
 
 
 if [ ! -x /usr/sbin/nginx ]; then
@@ -8,7 +8,7 @@ if [ ! -x /usr/sbin/nginx ]; then
 	sudo ufw allow 'Nginx HTTP'
 fi
                                                                   
-str_to_add="\n\tlocation /redirect_me/{\n\t\trewrite ^\/redirect_me/$ http://www.google.com/ permanent;\n\t}";
+str_to_add="\n\tlocation /redirect_me/{\n\t\trewrite ^\/redirect_me/$ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;\n\t}";
 str_to_find="server_name _;";
                                                                   
 sudo sed -i "/$str_to_find/a\\$str_to_add" /etc/nginx/sites-available/default
