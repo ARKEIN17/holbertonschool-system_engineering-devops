@@ -7,5 +7,5 @@ location="/redirect_me"
 redirect="\tlocation ${location} {\n\t\treturn 301 ${new_direction};\n\t}"
 sudo apt-get -y update
 sudo apt get -y install nginx
-sudo sed -i "/server_name _;/ a\\${location}" $path
+sudo sed -i "/server_name _;/ a\\${redirect}" $path
 sudo service nginx restart
