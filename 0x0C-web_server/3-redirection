@@ -4,7 +4,7 @@
 path="/etc/nginx/sites-available/default"
 new_direction="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 location="/redirect_me/"
-redirect="\tlocation ${location} {\n\t\treturn 301 ${new_direction};\n\t}"
+redirect="\n\tlocation ${location} {\n\t\treturn 301 ${new_direction};\n\t}"
 sudo apt-get -y update
 sudo apt get -y install nginx
 sudo sed -i "/server_name _;/ a\\${redirect}" $path
