@@ -1,11 +1,21 @@
 #!/usr/bin/env bash
 # redirection
 
-path="/etc/nginx/sites-available/default"
-new_direction="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-location="/redirect_me/"
-redirect="\n\tlocation ${location} {\n\t\treturn 301 ${new_direction};\n\t}"
-sudo apt-get -y update
-sudo apt get -y install nginx
-sudo sed -i "/server_name _;/ a\\${redirect}" $path
-sudo service nginx restart
+SU=$(whoami)
+PATH="/etc/nginx/sites-available/default"
+LINK="https://www.youtube.com/watch?v=dQw4w9WgXcQ/"
+LOCAL="/redirect_me"
+REDIRECT="\tlocation ${LOCAL} {\n\t\treturn 301 ${LINK};\n\t}"
+
+if [[ "$SU" == "root" ]];
+then
+        SU="sudo"
+else
+        echo "You need run with sudo"
+        exit
+fi
+
+$SU apt-get -y update
+$SU apt-get -y install nginx
+$SU sed -i "/server_name _;/ a\\${REDIRECT}" $PATH
+$SU service nginx restart
