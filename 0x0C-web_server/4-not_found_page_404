@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# 404 not found page
+
+DIR_SERVER="/var/www/html/"
+ERROR404="server {\n\terror_page 404 \/error404.html;"
+DIR="/etc/nginx/sites-available/default"
+
+
+if [ ! -x /usr/sbin/nginx ]; then
+	sudo apt -y update
+	sudo apt install -y --allow-downgrades nginx
+	sudo ufw allow 'Nginx HTTP'
+fi
+sudo echo "Ceci n'est pas une page" > "${DIR_SERVER}error404.html"
+
+sed -i "s/^server\s{/$ERROR404/1" $DIR
+sudo service nginx restart
