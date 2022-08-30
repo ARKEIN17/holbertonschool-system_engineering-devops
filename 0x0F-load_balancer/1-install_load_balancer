@@ -2,6 +2,7 @@
 # install load balancer
 
 sudo apt -y update
+sudo apt-get -y upgrade
 sudo apt-get -y install haproxy 
 sudo ufw allow 'haproxy'
 
