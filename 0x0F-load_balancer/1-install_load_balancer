@@ -3,7 +3,7 @@
 
 sudo apt -y update
 sudo apt-get -y install haproxy 
-sudo ufw haproxy
+sudo ufw allow 'haproxy'
 
 echo "
 listen server_request
