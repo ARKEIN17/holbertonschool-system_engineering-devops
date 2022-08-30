@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# instal ngnx
+
+
+sudo apt-get -y update
+sudo apt install nginx -y
+echo "Hello World!" | sudo tee /var/www/html/index.html
+link="\n\tlocation /redirect_me/{\n\t\trewrite ^\/redirect_me/$ https://www.youtube.com/watch?v=dQw4w9WgXcQ permanent;\n\t}";
+location="server_name _;";
+
+sudo sed -i "/$location/a\\$link" /etc/nginx/sites-available/default
+DIR_SERVER="/var/www/html/"
+ERROR404="server {\n\terror_page 404 \/error404.html;"
+DIR="/etc/nginx/sites-available/default"
+
+sudo echo "Ceci n'est pas une page" > "${DIR_SERVER}error404.html"
+
+sudo sed -i "s/^server\s{/$ERROR404/1" $DIR
+sudo sed -i "/server_name _;/ a\\ \n\tadd_header X-Served-By $(hostname);\n\n" $DIR  
+
+sudo service nginx restart
