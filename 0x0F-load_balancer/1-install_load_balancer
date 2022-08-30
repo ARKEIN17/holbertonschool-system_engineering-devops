@@ -8,7 +8,7 @@ listen server_request
         bind *:80
         mode http
         option httpchk
-        server webserver1 35.229.20.253:80 check
-        server webserver2 34.207.145.16:80 check
+        server webserver1 18.212.203.20:80 check
+        server webserver2 54.224.55.58:80 check
 " | sudo tee -a /etc/haproxy/haproxy.cfg;
 sudo service haproxy restart
