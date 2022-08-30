@@ -1,22 +1,18 @@
 #!/usr/bin/env bash
 # given subdomain
 
-subdomain () {
-    RECORDTYPE=$(dig $2.$1 | grep -A1 'ANSWER SECTION' | awk '{print $4}' | tail -n 1)
-    IP_DEST=$(dig $2.$1 | grep -A1 'ANSWER SECTION' | awk '{print $5}' | tail -n 1)
-    echo "The subdomain $2 is a $RECORDTYPE record and points to $IP_DEST"
+info_dns () {
+RECORD_TYPE=$(dig $2.$1 | grep -A1 'ANSWER SECTION' | awk '{print $4}' | tail -n 1)
+DESTINATION=$(dig $2.$1 | grep -A1 'ANSWER SECTION' | awk '{print $5}' | tail -n 1)
+echo "The subdomain $2 is a $RECORD_TYPE record and points to $DESTINATION"
 }
-
-if [ $# -lt 1 ]; then
-    echo "Not enough args";
-fi
 if [ $# -eq 1 ]
 then
-    subdomain $1 "www"
-    subdomain $1 "lb-01"
-    subdomain $1 "web-01"
-    subdomain $1 "web-02"
+    info_dns $1 "wwww"
+    info_dns $1 "lb-01"
+    info_dns $1 "web-01"
+    info_dns $1 "web-02"
 elif [ $# -gt 1 ]
 then
-    subdomain $1 $2
+    info_dns $1 $2
 fi
