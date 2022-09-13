@@ -1,0 +1,30 @@
+#!/usr/bin/python3
+"""export data in the JSON format."""
+
+from asyncio import tasks
+import json
+import requests
+from sys import argv
+
+if __name__ == "__main__":
+
+    todos = "https://jsonplaceholder.typicode.com/todos"
+    user = "https://jsonplaceholder.typicode.com/users/{}".format(argv[1])
+
+    data = requests.get(todos).json()
+    data_user = requests.get(user).json()
+    dict_completed = {}
+    task_completed = []
+    for task in data:
+        if task['userId'] == int(argv[1]):
+            task_format = {
+                'task': task['title'],
+                'completed': task['completed'],
+                'username': data_user['username']
+            }
+            task_completed.append(task_format)
+
+    dict_completed[argv[1]] = task_completed
+    with open("{}.json".format(argv[1]), 'w',) as file:
+        json_string = json.dumps(dict_completed)
+        file.write(json_string)
